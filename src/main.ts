@@ -14,7 +14,7 @@ export class OmlSprottyStarter extends SprottyLspEditStarter {
     return createOmlDiagramContainer(diagramIdentifier.clientId);
   }
 
-  protected addVscodeBindings(
+  protected override addVscodeBindings(
     container: Container,
     diagramIdentifier: SprottyDiagramIdentifier
   ): void {
@@ -28,4 +28,4 @@ export class OmlSprottyStarter extends SprottyLspEditStarter {
   }
 }
 
-new OmlSprottyStarter();
+new OmlSprottyStarter().start();

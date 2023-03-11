@@ -17,7 +17,7 @@ export class OmlModelFactory extends SGraphFactory {
 
   readonly SQRT_7_5 = Math.sqrt(1 * 1 + 2.5 * 2.5);
 
-  createElement(
+  override createElement(
     schema: SModelElementSchema,
     parent?: SParentElement
   ): SChildElement {
@@ -39,7 +39,7 @@ export class OmlModelFactory extends SGraphFactory {
     return element;
   }
 
-  protected initializeChild(
+  protected override initializeChild(
     child: SChildElement,
     schema: SModelElementSchema,
     parent?: SParentElement

@@ -27,7 +27,7 @@ import {
 } from "sprotty";
 
 export class OmlDiagram extends SGraph {
-  hasFeature(feature: symbol): boolean {
+  override hasFeature(feature: symbol): boolean {
     return (
       feature === hoverFeedbackFeature ||
       feature === popupFeature ||
@@ -39,7 +39,7 @@ export class OmlDiagram extends SGraph {
 export class OmlEdge extends SEdge {
   trace: String | undefined;
 
-  hasFeature(feature: symbol) {
+  override hasFeature(feature: symbol) {
     return (
       super.hasFeature(feature) ||
       feature === selectFeature ||
@@ -51,9 +51,9 @@ export class OmlEdge extends SEdge {
 export class OmlNode extends RectangularNode {
   cssClass: string;
   trace: string | undefined;
-  strokeWidth = 1;
+  override strokeWidth = 1;
 
-  hasFeature(feature: symbol): boolean {
+  override hasFeature(feature: symbol): boolean {
     return (
       feature === selectFeature ||
       feature === boundsFeature ||
@@ -70,7 +70,7 @@ export class ModuleNode extends OmlNode implements Expandable {
   title: string;
   expanded = false;
 
-  hasFeature(feature: symbol): boolean {
+  override hasFeature(feature: symbol): boolean {
     return feature === expandFeature || super.hasFeature(feature);
   }
 }
@@ -80,7 +80,7 @@ export class OmlHeaderNode extends SCompartment {}
 export class OmlLabel extends SLabel {
   trace: string | undefined;
 
-  hasFeature(feature: symbol): boolean {
+  override hasFeature(feature: symbol): boolean {
     return (
       super.hasFeature(feature) ||
       feature === selectFeature ||
@@ -90,7 +90,7 @@ export class OmlLabel extends SLabel {
 }
 
 export class OmlEditableLabel extends OmlLabel implements EditableLabel {
-  hasFeature(feature: symbol): boolean {
+  override hasFeature(feature: symbol): boolean {
     return feature === editLabelFeature || super.hasFeature(feature);
   }
 }
@@ -100,12 +100,12 @@ export class OmlEditableLabel extends OmlLabel implements EditableLabel {
 // }
 
 export class Tag extends SShapeElement {
-  size = {
+  override size = {
     width: 24,
     height: 24,
   };
 
-  hasFeature(feature: symbol): boolean {
+  override hasFeature(feature: symbol): boolean {
     return (
       feature === boundsFeature ||
       feature === layoutContainerFeature ||

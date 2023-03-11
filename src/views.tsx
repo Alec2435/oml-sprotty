@@ -6,7 +6,6 @@
  */
 
 /** @jsx svg */
-import { svg } from "snabbdom-jsx";
 import { injectable } from "inversify";
 import {
   RenderingContext,
@@ -19,9 +18,10 @@ import {
   SLabel,
   getSubType,
   SLabelView,
+  svg,
 } from "sprotty";
-import { VNode } from "snabbdom/vnode";
 import { OmlNode, ModuleNode, OmlEdge, Tag } from "./oml-models";
+import { VNode } from 'snabbdom';
 
 @injectable()
 export class ClassNodeView implements IView {
@@ -165,7 +165,7 @@ export class CaseNodeView implements IView {
 
 @injectable()
 export class UsesNodeView extends CaseNodeView {
-  render(node: OmlNode, context: RenderingContext): VNode {
+  override render(node: OmlNode, context: RenderingContext): VNode {
     const vnode = (
       <g class-sprotty-node={true}>
         <rect
@@ -204,7 +204,7 @@ export class NoteView implements IView {
 
 @injectable()
 export class CompositionEdgeView extends PolylineEdgeView {
-  protected renderAdditionals(
+  protected override renderAdditionals(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -236,7 +236,7 @@ export class CompositionEdgeView extends PolylineEdgeView {
 
 @injectable()
 export class StandardEdgeView extends PolylineEdgeView {
-  protected renderLine(
+  protected override renderLine(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -259,7 +259,7 @@ export class StandardEdgeView extends PolylineEdgeView {
 
 @injectable()
 export class RelationshipEdgeView extends PolylineEdgeView {
-  protected renderLine(
+  protected override renderLine(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -280,7 +280,7 @@ export class RelationshipEdgeView extends PolylineEdgeView {
 
 @injectable()
 export class SpecializationEdgeView extends PolylineEdgeView {
-  protected renderLine(
+  protected override renderLine(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -301,7 +301,7 @@ export class SpecializationEdgeView extends PolylineEdgeView {
 
 @injectable()
 export class RestrictsEdgeView extends PolylineEdgeView {
-  protected renderLine(
+  protected override renderLine(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -320,7 +320,7 @@ export class RestrictsEdgeView extends PolylineEdgeView {
 
 @injectable()
 export class ImportEdgeView extends SpecializationEdgeView {
-  protected renderAdditionals(
+  protected override renderAdditionals(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -347,7 +347,7 @@ export class ImportEdgeView extends SpecializationEdgeView {
 
 @injectable()
 export class ArrowEdgeView extends StandardEdgeView {
-  protected renderAdditionals(
+  protected override renderAdditionals(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -374,7 +374,7 @@ export class ArrowEdgeView extends StandardEdgeView {
 
 @injectable()
 export class RelationshipArrowEdgeView extends RelationshipEdgeView {
-  protected renderAdditionals(
+  protected override renderAdditionals(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -402,7 +402,7 @@ export class RelationshipArrowEdgeView extends RelationshipEdgeView {
 
 @injectable()
 export class RestrictsArrowEdgeView extends RestrictsEdgeView {
-  protected renderAdditionals(
+  protected override renderAdditionals(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -430,7 +430,7 @@ export class RestrictsArrowEdgeView extends RestrictsEdgeView {
 
 @injectable()
 export class SpecializationArrowEdgeView extends SpecializationEdgeView {
-  protected renderAdditionals(
+  protected override renderAdditionals(
     edge: OmlEdge,
     segments: Point[],
     context: RenderingContext
@@ -468,7 +468,7 @@ export class InvFunctionalView implements IView {
 
 @injectable()
 export class CardinalLabelView extends SLabelView {
-  render(label: Readonly<SLabel>, context: RenderingContext): VNode {
+  override render(label: Readonly<SLabel>, context: RenderingContext): VNode {
     console.log("LABEL:", label);
     const vnode = (
       <text class-sprotty-label={true} class-subtext={true}>
@@ -483,7 +483,7 @@ export class CardinalLabelView extends SLabelView {
 
 @injectable()
 export class RestrictsLabelView extends SLabelView {
-  render(label: Readonly<SLabel>, context: RenderingContext): VNode {
+  override render(label: Readonly<SLabel>, context: RenderingContext): VNode {
     const vnode = (
       <text class-sprotty-label={true} class-restriction={true}>
         {label.text}
@@ -497,7 +497,7 @@ export class RestrictsLabelView extends SLabelView {
 
 @injectable()
 export class RelationshipLabelView extends SLabelView {
-  render(label: Readonly<SLabel>, context: RenderingContext): VNode {
+  override render(label: Readonly<SLabel>, context: RenderingContext): VNode {
     const vnode = (
       <text class-sprotty-label={true} class-relationship={true}>
         {label.text}
